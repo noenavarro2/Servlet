@@ -4,16 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Formulario de datos</title>
+<title>Formulario para introducir consola </title>
 </head>
 <body>
 	<form action="welcome" method="post">
-		<span>dni:</span> 
-		<input type="text" name="dni"><br/>
 		<span>nombre:</span> 
 		<input type="text" name="nombre"> <br/>
-		<span>apellidos:</span> 
-		<input type="text" name="apellido"><br/>
+		<span>empresa:</span> 
+		<input type="text" name="empresa"><br/>
 		<input type="submit">
 	</form>
 	</body>

@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class VideoJuego {
 	private int ID;
+	private String titulo;
 	private String edadRecomendada;
 	private Date fechaLanzamiento;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -17,6 +18,15 @@ public class VideoJuego {
 
 	public void setID(int iD) {
 		ID = iD;
+	}
+	
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getEdadRecomendada() {
