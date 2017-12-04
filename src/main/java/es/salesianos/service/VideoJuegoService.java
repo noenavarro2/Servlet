@@ -6,18 +6,18 @@ import es.salesianos.assembler.ConsolaAssembler;
 import es.salesianos.connection.ConsolaRepository;
 import es.salesianos.model.Consola;
 
-public class UserService implements Service {
+public class VideoJuegoService implements Service {
 
 	ConsolaAssembler assembler = new ConsolaAssembler();
 	private ConsolaRepository repository = new ConsolaRepository();
 
 	public void createNewUserFromRequest(HttpServletRequest req) {
-		Consola user = assembler.createUserFromRequest(req);
+		Consola consola = assembler.createConsolaFromRequest(req);
 
-		if (!repository.search(user).isPresent()) {
-			repository.insert(user);
+		if (!repository.search(consola).isPresent()) {
+			repository.insert(consola);
 		} else {
-			repository.update(user);
+			repository.update(consola);
 		}
 	}
 

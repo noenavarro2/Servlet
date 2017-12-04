@@ -21,10 +21,9 @@ public class ConsolaRepository {
 		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO USER (dni,nombre,apellido)" + "VALUES (?, ?, ?)");
-			preparedStatement.setString(1, userFormulario.getDni());
+			preparedStatement = conn.prepareStatement("INSERT INTO consolas (ID,nombre)" + "VALUES (?, ?)");
+			preparedStatement.setString(1, userFormulario.getID());
 			preparedStatement.setString(2, userFormulario.getNombre());
-			preparedStatement.setString(3, userFormulario.getApellido());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -40,23 +39,22 @@ public class ConsolaRepository {
 
 
 
-	public Optional<Consola> search(Consola user) {
-		Consola person = null;
+	public Optional<Consola> search(Consola consol) {
+		Consola consola = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection conn = null;
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("SELECT * FROM USER WHERE dni = ?");
-			preparedStatement.setString(1, user.getDni());
+			preparedStatement = conn.prepareStatement("SELECT * FROM consolas WHERE ID = ?");
+			preparedStatement.setString(1, consol.getID());
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				person = new Consola();
-				person.setDni(resultSet.getString("dni"));
-				person.setNombre(resultSet.getString("nombre"));
-				person.setApellido(resultSet.getString("apellido"));
+				consola = new Consola();
+				consola.setID(resultSet.getString("ID"));
+				consola.setNombre(resultSet.getString("nombre"));
 			}
 
 		} catch (Exception e) {
@@ -67,24 +65,22 @@ public class ConsolaRepository {
 			connection.close(conn);
 		}
 
-		return Optional.ofNullable(person);
+		return Optional.ofNullable(consola);
 
 	}
 
-	public void update(Consola user) {
+	public void update(Consola consol) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("UPDATE user SET " + "nombre = ?, apellido = ? WHERE dni = ?");
+			preparedStatement = conn.prepareStatement("UPDATE consolas SET " + "nombre= ? WHERE ID = ?");
 
-			preparedStatement.setString(1, user.getNombre());
-			preparedStatement.setString(2, user.getApellido());
-			preparedStatement.setString(3, user.getDni());
+			preparedStatement.setString(1, consol.getNombre());
+			preparedStatement.setString(2, consol.getID());
 			preparedStatement.executeUpdate();
 
-			System.out.println("UPDATE user SET " + "nombre = ?, apellido = ? WHERE dni = ?");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,7 +92,7 @@ public class ConsolaRepository {
 	}
 
 	public List<Consola> listAllConsolas() {
-		List<Consola> users = new ArrayList<Consola>();
+		List<Consola> consolas = new ArrayList<Consola>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -104,15 +100,14 @@ public class ConsolaRepository {
 		try {
 			conn = connection.open(jdbcUrl);
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM user");
+			resultSet = statement.executeQuery("SELECT * FROM consolas");
 
 			while (resultSet.next()) {
-				Consola person = new Consola();
-				person.setDni(resultSet.getString("dni"));
-				person.setNombre(resultSet.getString("nombre"));
-				person.setApellido(resultSet.getString("apellido"));
+				Consola consola = new Consola();
+				consola.setID(resultSet.getString("ID"));
+				consola.setNombre(resultSet.getString("nombre"));
 
-				users.add(person);
+				consolas.add(consola);
 			}
 
 		} catch (Exception e) {
@@ -124,7 +119,7 @@ public class ConsolaRepository {
 			connection.close(conn);
 		}
 
-		return users;
+		return consolas;
 	}
 
 }

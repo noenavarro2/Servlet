@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.salesianos.service.Service;
-import es.salesianos.service.UserService;
+import es.salesianos.service.ConsolaService;
 
 public class WelcomeServlet extends HttpServlet {
 
 
-	Service service = new UserService();
+	Service service = new ConsolaService();
 	private static final long serialVersionUID = 1L;
 
 	@Override

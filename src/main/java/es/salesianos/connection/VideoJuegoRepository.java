@@ -1,6 +1,7 @@
 package es.salesianos.connection;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,8 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import es.salesianos.model.Film;
 import es.salesianos.model.VideoJuego;
 
 public class VideoJuegoRepository {
@@ -52,13 +51,15 @@ public class VideoJuegoRepository {
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'";
 
-	public void insert(Film filmFormulario) {
+	public void insert(VideoJuego videojuego) {
 		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO FILM (id,tittle)" + "VALUES (?, ?)");
-			preparedStatement.setInt(1, filmFormulario.getId());
-			preparedStatement.setString(2, filmFormulario.getTittle());
+			preparedStatement = conn.prepareStatement("INSERT INTO videojuegos (ID,titulo,edadRecomendada,fechaLanzamiento)" + "VALUES (?, ?, ?,?)");
+			preparedStatement.setString(1, videojuego.getID());
+			preparedStatement.setString(2, videojuego.getTitulo());
+			preparedStatement.setString(3, videojuego.getEdadRecomendada());
+			preparedStatement.setDate(4,(Date) videojuego.getFechaLanzamiento()); 
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,22 +75,24 @@ public class VideoJuegoRepository {
 
 
 
-	public Optional<Film> search(Film film) {
-		Film person = null;
+	public Optional<VideoJuego> search(VideoJuego videojuego) {
+		VideoJuego videoJuego = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection conn = null;
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("SELECT * FROM Film WHERE dni = ?");
-			preparedStatement.setInt(1, film.getId());
+			preparedStatement = conn.prepareStatement("SELECT * FROM videojuegos WHERE ID = ?");
+			preparedStatement.setString(1, videojuego.getID());
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				person = new Film();
-				person.setId(resultSet.getInt("id"));
-				person.setTittle(resultSet.getString("tittle"));
+				videoJuego = new VideoJuego();
+				videoJuego.setID(resultSet.getString("ID"));
+				videoJuego.setTitulo(resultSet.getString("titulo"));
+				videoJuego.setEdadRecomendada(resultSet.getString("edadRecomendada"));
+				videoJuego.setFechaLanzamiento(resultSet.getString("fechaRecomendada")); 
 			}
 
 		} catch (Exception e) {
@@ -100,23 +103,23 @@ public class VideoJuegoRepository {
 			connection.close(conn);
 		}
 
-		return Optional.ofNullable(person);
+		return Optional.ofNullable(videoJuego);
 
 	}
 
-	public void update(Film user) {
+	public void update(VideoJuego videojuego) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("UPDATE film SET " + "nombre = ?, apellido = ? WHERE dni = ?");
+			preparedStatement = conn.prepareStatement("UPDATE videojuegos SET " + "titulo = ?, edadRecomendada = ? , fechaLanzamiento =? ,WHERE ID = ?");
 
-			preparedStatement.setInt(1, user.getId());
-			preparedStatement.setString(2, user.getTittle());
+			preparedStatement.setString(1, videojuego.getID());
+			preparedStatement.setString(2, videojuego.getTitulo());
+			preparedStatement.setString(3, videojuego.getEdadRecomendada());
+			preparedStatement.setDate(4,(Date) videojuego.getFechaLanzamiento()); 
 			preparedStatement.executeUpdate();
-
-			System.out.println("UPDATE film SET " + "tittle = ? WHERE codFilm = ?");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -128,7 +131,7 @@ public class VideoJuegoRepository {
 	}
 
 	public List<VideoJuego> listAllVideoJuegos() {
-		List<Film> users = new ArrayList<Film>();
+		List<VideoJuego> videojuegos = new ArrayList<VideoJuego>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -136,13 +139,15 @@ public class VideoJuegoRepository {
 		try {
 			conn = connection.open(jdbcUrl);
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM film");
+			resultSet = statement.executeQuery("SELECT * FROM videojuegos");
 
 			while (resultSet.next()) {
-				Film person = new Film();
-				person.setId(resultSet.getInt("codFilm"));
-				person.setTittle(resultSet.getString("nombre"));
-				users.add(person);
+				VideoJuego videoJuego = new VideoJuego();
+				videoJuego.setID(resultSet.getString("ID"));
+				videoJuego.setTitulo(resultSet.getString("titulo"));
+				videoJuego.setEdadRecomendada(resultSet.getString("edadRecomendada"));
+				videoJuego.setFechaLanzamiento(resultSet.getString("fechaLanzamiento")); 
+				videojuegos.add(videoJuego);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,7 +158,7 @@ public class VideoJuegoRepository {
 			connection.close(conn);
 		}
 
-		return users;
+		return videojuegos;
 	}
 
 }
