@@ -10,8 +10,19 @@ public class VideoJuego {
 	private String edadRecomendada;
 	private Date fechaLanzamiento;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private String empresa;
+	public static Empresa empresas;
 	
 	
+	
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+
 	public String getID() {
 		return ID;
 	}
