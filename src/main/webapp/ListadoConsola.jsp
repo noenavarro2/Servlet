@@ -9,36 +9,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Listado de usuario</title>
+<title>Listado de Consolas</title>
 </head>
 <body>
-	<form action="cargarListado" method="post">
+	<form action="cargarListadoConsola" method="post">
 		<input type="submit" value="ver listado">
 	</form>
 
 	<table border="1">
 		<thead>
 			<tr>
+				<td>ID</td>
 				<td>Nombre</td>
-				<td>Apellido</td>
-				<td>Dni</td>
+				<td>Empresa</td>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="user" items="${users}">
+			<c:forEach var="consola" items="${consolas}">
 				<tr>
-					<td><c:out value="${user.nombre}" /></td>
-					<td><c:out value="${user.apellido}" /></td>
-					<td><c:out value="${user.dni}" /></td>
-					<td><a href="/delete?dni=${user.nombre}">borrar</a></td>
+					<td><c:out value="${consola.ID}" /></td>
+					<td><c:out value="${consola.nombre}" /></td>
+					<td><c:out value="${consola.empresa}" /></td>
+					<td><a href="/delete?ID=${consola.ID}">borrar</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
 	<select>
-		<c:forEach var="user" items="${users}">
-			<option value="${user.nombre}">${user.nombre}</option>
+		<c:forEach var="consola" items="${consolas}">
+			<option value="${consola.nombre}">${consola.nombre}</option>
 		</c:forEach>
 	</select>
 

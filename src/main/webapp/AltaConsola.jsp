@@ -7,7 +7,7 @@
 <title>Formulario para introducir consola </title>
 </head>
 <body>
-	<form action="welcome" method="post">
+	<form action="ListadoConsola" method="post">
 		<span>nombre:</span> 
 		<input type="text" name="nombre"> <br/>
 		<span>empresa:</span> 

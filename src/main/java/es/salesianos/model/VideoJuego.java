@@ -5,18 +5,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class VideoJuego {
-	private int ID;
+	private String ID;//lo mismo lo pongo en string para que no de error en el assembler
 	private String titulo;
 	private String edadRecomendada;
 	private Date fechaLanzamiento;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	
-	public int getID() {
+	public String getID() {
 		return ID;
 	}
 
-	public void setID(int iD) {
+	public void setID(String iD) {
 		ID = iD;
 	}
 	

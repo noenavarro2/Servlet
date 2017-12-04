@@ -7,7 +7,7 @@
 <title>Formulario Alta de Videojuego</title>
 </head>
 <body>
-	<form action="welcome" method="post">
+	<form action="ListadoVideoJuego" method="post">
 		<span>titulo:</span> 
 		<input type="text" name="titulo"><br/>
 		<span>edad recomendada:</span> 

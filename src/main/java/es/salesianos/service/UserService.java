@@ -2,14 +2,14 @@ package es.salesianos.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import es.salesianos.assembler.UserAssembler;
-import es.salesianos.connection.UserRepository;
+import es.salesianos.assembler.ConsolaAssembler;
+import es.salesianos.connection.ConsolaRepository;
 import es.salesianos.model.Consola;
 
 public class UserService implements Service {
 
-	UserAssembler assembler = new UserAssembler();
-	private UserRepository repository = new UserRepository();
+	ConsolaAssembler assembler = new ConsolaAssembler();
+	private ConsolaRepository repository = new ConsolaRepository();
 
 	public void createNewUserFromRequest(HttpServletRequest req) {
 		Consola user = assembler.createUserFromRequest(req);

@@ -2,15 +2,15 @@ package es.salesianos.model;
 
 public class Consola {
 
-	private int ID;
+	private String ID;//lo pongo como string para que lo coja el assembler
 	private String nombre;
 	private String empresa;
 	private Empresa empresas = new Empresa();
 	
-	public int getID() {
+	public String getID() {
 		return ID;
 	}
-	public void setID(int iD) {
+	public void setID(String iD) {
 		ID = iD;
 	}
 	public String getNombre() {

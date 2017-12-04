@@ -9,55 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import es.salesianos.model.Film;
+import es.salesianos.model.Consola;
 
-public class FilmRepository {
+public class ConsolaRepository {
 
-	private AbstractConnection connection = new AbstractConnection() {
-
-		@Override
-		public String getDriver() {
-			return "org.h2.Driver";
-		}
-
-		@Override
-		public String getDatabaseUser() {
-			return "sa";
-		}
-
-		@Override
-		public String getDatabasePassword() {
-			return "";
-		}
-	};
-	
-	private AbstractConnection connectionPostgres = new AbstractConnection() {
-
-		@Override
-		public String getDriver() {
-			return "org.postgresql.Driver";
-		}
-
-		@Override
-		public String getDatabaseUser() {
-			return "postgres";
-		}
-
-		@Override
-		public String getDatabasePassword() {
-			return "postgres";
-		}
-	};
+	AbstractConnection connection;
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'";
 
-	public void insert(Film filmFormulario) {
+	public void insert(Consola userFormulario) {
 		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO FILM (id,tittle)" + "VALUES (?, ?)");
-			preparedStatement.setInt(1, filmFormulario.getId());
-			preparedStatement.setString(2, filmFormulario.getTittle());
+			preparedStatement = conn.prepareStatement("INSERT INTO USER (dni,nombre,apellido)" + "VALUES (?, ?, ?)");
+			preparedStatement.setString(1, userFormulario.getDni());
+			preparedStatement.setString(2, userFormulario.getNombre());
+			preparedStatement.setString(3, userFormulario.getApellido());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,22 +40,23 @@ public class FilmRepository {
 
 
 
-	public Optional<Film> search(Film film) {
-		Film person = null;
+	public Optional<Consola> search(Consola user) {
+		Consola person = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection conn = null;
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("SELECT * FROM Film WHERE dni = ?");
-			preparedStatement.setInt(1, film.getId());
+			preparedStatement = conn.prepareStatement("SELECT * FROM USER WHERE dni = ?");
+			preparedStatement.setString(1, user.getDni());
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				person = new Film();
-				person.setId(resultSet.getInt("id"));
-				person.setTittle(resultSet.getString("tittle"));
+				person = new Consola();
+				person.setDni(resultSet.getString("dni"));
+				person.setNombre(resultSet.getString("nombre"));
+				person.setApellido(resultSet.getString("apellido"));
 			}
 
 		} catch (Exception e) {
@@ -103,19 +71,20 @@ public class FilmRepository {
 
 	}
 
-	public void update(Film user) {
+	public void update(Consola user) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("UPDATE film SET " + "nombre = ?, apellido = ? WHERE dni = ?");
+			preparedStatement = conn.prepareStatement("UPDATE user SET " + "nombre = ?, apellido = ? WHERE dni = ?");
 
-			preparedStatement.setInt(1, user.getId());
-			preparedStatement.setString(2, user.getTittle());
+			preparedStatement.setString(1, user.getNombre());
+			preparedStatement.setString(2, user.getApellido());
+			preparedStatement.setString(3, user.getDni());
 			preparedStatement.executeUpdate();
 
-			System.out.println("UPDATE film SET " + "tittle = ? WHERE codFilm = ?");
+			System.out.println("UPDATE user SET " + "nombre = ?, apellido = ? WHERE dni = ?");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,8 +95,8 @@ public class FilmRepository {
 		}
 	}
 
-	public List<Film> listAllUsers() {
-		List<Film> users = new ArrayList<Film>();
+	public List<Consola> listAllConsolas() {
+		List<Consola> users = new ArrayList<Consola>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -135,14 +104,17 @@ public class FilmRepository {
 		try {
 			conn = connection.open(jdbcUrl);
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM film");
+			resultSet = statement.executeQuery("SELECT * FROM user");
 
 			while (resultSet.next()) {
-				Film person = new Film();
-				person.setId(resultSet.getInt("codFilm"));
-				person.setTittle(resultSet.getString("nombre"));
+				Consola person = new Consola();
+				person.setDni(resultSet.getString("dni"));
+				person.setNombre(resultSet.getString("nombre"));
+				person.setApellido(resultSet.getString("apellido"));
+
 				users.add(person);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

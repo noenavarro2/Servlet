@@ -10,5 +10,10 @@
 Bienvenido
 <b><%= request.getParameter("nombre") %></b>
 <b><%= request.getParameter("apellido") %></b>
+    
+	<form action="delete" method="post">
+		<input type="text" value="${dni}">
+		<input type="submit" value="Si">
+	</form>
 </body>
 </html>
