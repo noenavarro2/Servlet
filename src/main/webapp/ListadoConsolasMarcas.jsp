@@ -15,34 +15,33 @@
 	<form action="mostrarlistado" method="post">
 		<input type="submit" value="ver listado">
 	</form>
+	<select>
+		<c:forEach var="consola" items="${consolas}">
+			<option value="${consola.empresa}">${consola.empresa}</option>
+		</c:forEach>
+	</select>
 
 	<table border="1">
 		<thead>
 			<tr>
 				<td>ID</td>
-				<td>Titulo</td>
-				<td>Edad</td>
-				<td>Fecha de lanzamiento</td>
+				<td>Nombre</td>
+				<td>Empresa</td>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="videojuego" items="${videojuegos}">
+			<c:forEach var="consola" items="${consolaMarca}">
 				<tr>
-					<td><c:out value="${videojuego.ID}" /></td>
-					<td><c:out value="${videojuego.titulo}" /></td>
-					<td><c:out value="${videojuego.edadRecomendada}" /></td>
-					<td><c:out value="${videojuego.fechaLanzamiento}" /></td>
-					<td><a href="/delete?ID=${videojuego.ID}">borrar</a></td>
+					<td><c:out value="${consola.ID}" /></td>
+					<td><c:out value="${consola.nombre}" /></td>
+					<td><c:out value="${consola.empresa}" /></td>
+					<td><a href="/delete?ID=${consola.ID}">borrar</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
-	<select>
-		<c:forEach var="videojuego" items="${videojuegos}">
-			<option value="${videojuego.titulo}">${videojuego.titulo}</option>
-		</c:forEach>
-	</select>
+	
 
 </body>
 </html>

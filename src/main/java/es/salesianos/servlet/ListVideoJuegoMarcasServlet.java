@@ -3,6 +3,7 @@ package es.salesianos.servlet;
 import java.io.IOException;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,10 +21,12 @@ public class ListVideoJuegoMarcasServlet extends HttpServlet {
 
 	VideoJuegoRepository videoJuegoReposirory = new VideoJuegoRepository();
 
-	@Override
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<VideoJuego> listAllVideoJuegos = videoJuegoReposirory.listAllVideoJuegos();
-		req.getSession().setAttribute("videojuegos",  listAllVideoJuegos);
+		VideoJuego videojuego = null;
+		Consola consola = null;
+		Optional<VideoJuego> listAllVideoJuegosporMarca = videoJuegoReposirory.search(videojuego, consola);
+		req.getSession().setAttribute("videojuegosmarcas",  listAllVideoJuegosporMarca);
 		redirect(req, resp);
 	}
 

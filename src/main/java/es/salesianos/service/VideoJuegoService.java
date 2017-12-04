@@ -18,7 +18,7 @@ public class VideoJuegoService implements Service {
 	public void createNewUserFromRequest(HttpServletRequest req) {
 		VideoJuego videojuego = assembler.createVideoJuegoFromRequest(req);
 
-		if (!repository.search(videojuego).isPresent()) {
+		if (!repository.search(videojuego, null).isPresent()) {
 			repository.insert(videojuego);
 		} else {
 			repository.update(videojuego);

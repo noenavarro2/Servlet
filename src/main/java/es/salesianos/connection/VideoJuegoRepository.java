@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import es.salesianos.model.Consola;
 import es.salesianos.model.VideoJuego;
 
 public class VideoJuegoRepository {
@@ -75,7 +77,7 @@ public class VideoJuegoRepository {
 
 
 
-	public Optional<VideoJuego> search (VideoJuego videojuego) {
+	public Optional<VideoJuego> search (VideoJuego videojuego, Consola consola) {
 		VideoJuego videoJuego = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -83,8 +85,9 @@ public class VideoJuegoRepository {
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("SELECT * FROM videojuegos WHERE = ?");
+			preparedStatement = conn.prepareStatement("SELECT * FROM videojuegos WHERE ID = ? and empresa = ?");
 			preparedStatement.setString(1, videojuego.getID());
+			preparedStatement.setString(2, consola.getEmpresa());
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {

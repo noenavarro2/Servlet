@@ -12,9 +12,14 @@
 <title>Listado de Video Juegos</title>
 </head>
 <body>
-	<form action="/mostrarlistado" method="post">
+	<form action="/videojuegosmarcas" method="post">
 		<input type="submit" value="ver listado">
 	</form>
+	<select>
+		<c:forEach var="consola" items="${consolas}">
+			<option value="${consola.empresa}">${consola.empresa}</option>
+		</c:forEach>
+	</select>
 
 	<table border="1">
 		<thead>
@@ -32,17 +37,12 @@
 					<td><c:out value="${videojuego.titulo}" /></td>
 					<td><c:out value="${videojuego.edadRecomendada}" /></td>
 					<td><c:out value="${videojuego.fechaLanzamiento}" /></td>
-					<td><a href="/delete?ID=${videojuego.ID}">borrar</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
-	<select>
-		<c:forEach var="videojuego" items="${videojuegos}">
-			<option value="${videojuego.titulo}">${videojuego.titulo}</option>
-		</c:forEach>
-	</select>
+	
 
 </body>
 </html>

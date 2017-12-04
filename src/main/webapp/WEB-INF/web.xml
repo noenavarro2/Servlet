@@ -4,24 +4,27 @@
     version="3.1">
 	<display-name>Archetype Created Web Application</display-name>
 
-	<servlet>
-		<servlet-name>WelcomeServlet</servlet-name>
-		<servlet-class>es.salesianos.servlet.WelcomeServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>WelcomeServlet</servlet-name>
-		<url-pattern>/welcome</url-pattern>
-	</servlet-mapping>
+	
 
 	<servlet>
-		<servlet-name>DeleteServlet</servlet-name>
-		<servlet-class>es.salesianos.servlet.DeleteServlet</servlet-class>
+		<servlet-name>ListConsolasMarcasServlet</servlet-name>
+		<servlet-class>es.salesianos.servlet.ListConsolasMarcasServlet</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>DeleteServlet</servlet-name>
-		<url-pattern>/delete</url-pattern>
+		<servlet-name>ListConsolasMarcasServlet</servlet-name>
+		<url-pattern>/mostrarlistado</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>ListVideoJuegosMarcasServlet</servlet-name>
+		<servlet-class>es.salesianos.servlet.ListVideoJuegosMarcasServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ListVideoJuegosMarcasServlet</servlet-name>
+		<url-pattern>/mostrarlistado</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
