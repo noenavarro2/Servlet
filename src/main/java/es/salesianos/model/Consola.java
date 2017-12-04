@@ -1,43 +1,36 @@
 package es.salesianos.model;
 
-public class User implements IEntity<String> {
+public class Consola {
 
-	String dni;
-	String nombre;
-	String apellido;
-
-	public String getDni() {
-		return dni;
+	private int ID;
+	private String nombre;
+	private String empresa;
+	private Empresa empresas = new Empresa();
+	
+	public int getID() {
+		return ID;
 	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setID(int iD) {
+		ID = iD;
 	}
-
 	public String getNombre() {
 		return nombre;
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public String getApellido() {
-		return apellido;
+	public String getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+	public Empresa getEmpresas() {
+		return empresas;
+	}
+	public void setEmpresas(Empresa empresas) {
+		this.empresas = empresas;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	@Override
-	public String getId() {
-		return getDni();
-	}
-
-	@Override
-	public void setId(String id) {
-		setDni(id);
-	}
-
+	
 }

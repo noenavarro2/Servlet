@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import es.salesianos.model.User;
+import es.salesianos.model.Consola;
 
 public class UserRepository {
 
@@ -17,7 +17,7 @@ public class UserRepository {
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'";
 
-	public void insert(User userFormulario) {
+	public void insert(Consola userFormulario) {
 		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
@@ -40,8 +40,8 @@ public class UserRepository {
 
 
 
-	public Optional<User> search(User user) {
-		User person = null;
+	public Optional<Consola> search(Consola user) {
+		Consola person = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection conn = null;
@@ -53,7 +53,7 @@ public class UserRepository {
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				person = new User();
+				person = new Consola();
 				person.setDni(resultSet.getString("dni"));
 				person.setNombre(resultSet.getString("nombre"));
 				person.setApellido(resultSet.getString("apellido"));
@@ -71,7 +71,7 @@ public class UserRepository {
 
 	}
 
-	public void update(User user) {
+	public void update(Consola user) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 
@@ -95,8 +95,8 @@ public class UserRepository {
 		}
 	}
 
-	public List<User> listAllUsers() {
-		List<User> users = new ArrayList<User>();
+	public List<Consola> listAllUsers() {
+		List<Consola> users = new ArrayList<Consola>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -107,7 +107,7 @@ public class UserRepository {
 			resultSet = statement.executeQuery("SELECT * FROM user");
 
 			while (resultSet.next()) {
-				User person = new User();
+				Consola person = new Consola();
 				person.setDni(resultSet.getString("dni"));
 				person.setNombre(resultSet.getString("nombre"));
 				person.setApellido(resultSet.getString("apellido"));

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.salesianos.connection.UserRepository;
-import es.salesianos.model.User;
+import es.salesianos.model.Consola;
 
 public class ListUserServlet extends HttpServlet {
 
@@ -18,7 +18,7 @@ public class ListUserServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<User> listAllUsers = userReposirory.listAllUsers();
+		List<Consola> listAllUsers = userReposirory.listAllUsers();
 		req.getSession().setAttribute("users", listAllUsers);
 		redirect(req, resp);
 	}

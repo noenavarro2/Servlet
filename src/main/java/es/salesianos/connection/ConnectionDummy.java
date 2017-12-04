@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import es.salesianos.model.User;
+import es.salesianos.model.Consola;
 
 @Component("dummy")
 public class ConnectionDummy implements ConnectionManager {
@@ -20,20 +20,20 @@ public class ConnectionDummy implements ConnectionManager {
 
 	}
 
-	public void insert(User user) {
+	public void insert(Consola user) {
 		System.out.println("insert ficticio");
 
 	}
 
-	public Optional<User> search(User user) {
+	public Optional<Consola> search(Consola user) {
 		return Optional.empty();
 	}
 
-	public void update(User user) {
+	public void update(Consola user) {
 
 	}
 
-	public List<User> listAllUsers() {
+	public List<Consola> listAllUsers() {
 		return Collections.EMPTY_LIST;
 	}
 

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-import es.salesianos.model.User;
+import es.salesianos.model.Consola;
 
 public interface ConnectionManager {
 	
@@ -12,12 +12,12 @@ public interface ConnectionManager {
 	
 	public void close(Connection conn);
 
-	void insert(User user);
+	void insert(Consola user);
 
-	Optional<User> search(User user);
+	Optional<Consola> search(Consola user);
 
-	void update(User user);
+	void update(Consola user);
 
-	List<User> listAllUsers();
+	List<Consola> listAllUsers();
 
 }
