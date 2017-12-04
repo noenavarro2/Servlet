@@ -109,6 +109,40 @@ public class VideoJuegoRepository {
 		return Optional.ofNullable(videoJuego);
 
 	}
+	
+
+	public Optional<VideoJuego> searchPorEdad (VideoJuego videojuego) {
+		VideoJuego videoJuego = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Connection conn = null;
+
+		try {
+			conn = connection.open(jdbcUrl);
+			preparedStatement = conn.prepareStatement("SELECT * FROM videojuegos WHERE edadRecomendada = ? or edadRecomendada <= ?");
+			preparedStatement.setString(1, videojuego.getEdadRecomendada());
+			preparedStatement.setString(2, videojuego.getEdadRecomendadaoMayor(videojuego.getEdadRecomendada()));
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				videoJuego = new VideoJuego();
+				videoJuego.setID(resultSet.getString("ID"));
+				videoJuego.setTitulo(resultSet.getString("titulo"));
+				videoJuego.setEdadRecomendada(resultSet.getString("edadRecomendada"));
+				videoJuego.setFechaLanzamiento(resultSet.getString("fechaRecomendada")); 
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			connection.close(preparedStatement);
+			connection.close(conn);
+		}
+
+		return Optional.ofNullable(videoJuego);
+
+	}
 
 	public void update(VideoJuego videojuego) {
 		Connection conn = null;

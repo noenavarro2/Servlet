@@ -36,11 +36,6 @@
 		</tbody>
 	</table>
 
-	<select>
-		<c:forEach var="consola" items="${consolas}">
-			<option value="${consola.nombre}">${consola.nombre}</option>
-		</c:forEach>
-	</select>
 
 </body>
 </html>

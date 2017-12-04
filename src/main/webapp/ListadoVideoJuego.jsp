@@ -38,11 +38,6 @@
 		</tbody>
 	</table>
 
-	<select>
-		<c:forEach var="videojuego" items="${videojuegos}">
-			<option value="${videojuego.titulo}">${videojuego.titulo}</option>
-		</c:forEach>
-	</select>
 
 </body>
 </html>

@@ -49,7 +49,14 @@ public class VideoJuego {
 			throw new RuntimeException(e);
 		}
 	}
+	public String getEdadRecomendadaoMayor(String edadElegida)
+	{
+		//if((int)edadRecomendada<=(int)edadElegida ) { como es un string no puedo compararlo asi pero este seria el metodo para que sea mayor
+			return edadRecomendada;
+	}
+		
+}
 
 	
 
-}
+
