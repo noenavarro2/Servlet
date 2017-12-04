@@ -2,22 +2,26 @@ package es.salesianos.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 import es.salesianos.assembler.ConsolaAssembler;
+import es.salesianos.assembler.VideoJuegoAssembler;
 import es.salesianos.connection.ConsolaRepository;
-import es.salesianos.model.Consola;
+import es.salesianos.connection.VideoJuegoRepository;
+import es.salesianos.model.VideoJuego;
+
 
 public class VideoJuegoService implements Service {
 
-	ConsolaAssembler assembler = new ConsolaAssembler();
-	private ConsolaRepository repository = new ConsolaRepository();
+	VideoJuegoAssembler assembler = new VideoJuegoAssembler();
+	private VideoJuegoRepository repository = new VideoJuegoRepository();
 
 	public void createNewUserFromRequest(HttpServletRequest req) {
-		Consola consola = assembler.createConsolaFromRequest(req);
+		VideoJuego videojuego = assembler.createVideoJuegoFromRequest(req);
 
-		if (!repository.search(consola).isPresent()) {
-			repository.insert(consola);
+		if (!repository.search(videojuego).isPresent()) {
+			repository.insert(videojuego);
 		} else {
-			repository.update(consola);
+			repository.update(videojuego);
 		}
 	}
 

@@ -21,9 +21,10 @@ public class ConsolaRepository {
 		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO consolas (ID,nombre)" + "VALUES (?, ?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO consolas (ID,nombre)" + "VALUES (?, ?,?)");
 			preparedStatement.setString(1, userFormulario.getID());
 			preparedStatement.setString(2, userFormulario.getNombre());
+			preparedStatement.setString(3, userFormulario.getEmpresa());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,14 +48,16 @@ public class ConsolaRepository {
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("SELECT * FROM consolas WHERE ID = ?");
+			preparedStatement = conn.prepareStatement("SELECT * FROM consolas WHERE ID = ? and empresa = ?" );
 			preparedStatement.setString(1, consol.getID());
+			preparedStatement.setString(2, consol.getEmpresa());
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
 				consola = new Consola();
 				consola.setID(resultSet.getString("ID"));
 				consola.setNombre(resultSet.getString("nombre"));
+				consola.setEmpresa(resultSet.getString("empresa"));
 			}
 
 		} catch (Exception e) {

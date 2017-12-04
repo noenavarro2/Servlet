@@ -75,7 +75,7 @@ public class VideoJuegoRepository {
 
 
 
-	public Optional<VideoJuego> search(VideoJuego videojuego) {
+	public Optional<VideoJuego> search (VideoJuego videojuego) {
 		VideoJuego videoJuego = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -83,7 +83,7 @@ public class VideoJuegoRepository {
 
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("SELECT * FROM videojuegos WHERE ID = ?");
+			preparedStatement = conn.prepareStatement("SELECT * FROM videojuegos WHERE = ?");
 			preparedStatement.setString(1, videojuego.getID());
 			resultSet = preparedStatement.executeQuery();
 
