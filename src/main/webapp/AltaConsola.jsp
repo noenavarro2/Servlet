@@ -4,15 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Formulario para introducir consola </title>
+<title>AltaConsola</title>
 </head>
 <body>
-	<form action="ListadoConsola" method="post">
-		<span>nombre:</span> 
-		<input type="text" name="nombre"> <br/>
-		<span>empresa:</span> 
-		<input type="text" name="empresa"><br/>
-		<input type="submit">
+<body>
+	<form action="console" method="post">
+		<span>name:</span> 
+		<input type="text" name="name"/> <br/>
+		<span>codCompany:</span> 
+		<input type="text" name="codCompany"/><br/>
+		<input type="submit"/>
 	</form>
-	</body>
+</body>
+</body>
 </html>

@@ -10,23 +10,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.salesianos.connection.VideoJuegoRepository;
-import es.salesianos.model.VideoJuego;
-
+import es.salesianos.model.VideoGame;
+import es.salesianos.service.VideoGameService;
 
 public class ListVideoJuegosServlet extends HttpServlet {
 
-	VideoJuegoRepository videoJuegoReposirory = new VideoJuegoRepository();
+	VideoGameService service = new VideoGameService();
 
-	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<VideoJuego> listAllVideoJuegos = videoJuegoReposirory.listAllVideoJuegos();
-		req.getSession().setAttribute("videojuegos",  listAllVideoJuegos);
+		doAction(req, resp);
+	}
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doAction(req, resp);
+	}
+
+	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		service.createObjectFromRequest(req);
 		redirect(req, resp);
 	}
 
 	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ListadoVideoJuego.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/VideoGameList.jsp");
 		dispatcher.forward(req, resp);
+	}
+
+	public VideoGameService getService() {
+		return service;
+	}
+
+	public void setService(VideoGameService service) {
+		this.service = service;
 	}
 }

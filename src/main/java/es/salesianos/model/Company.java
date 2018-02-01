@@ -4,13 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Empresa {
+public class Company {
 
 	private int ID;
-	private String nombre;
-	private Date fecha;
+	private String name;
+	private Date date;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	
 	
 	public int getID() {
 		return ID;
@@ -20,24 +19,29 @@ public class Empresa {
 		ID = iD;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Date getFecha() {
-		return fecha;
+	public Date getDate() {
+		return date;
 	}
 	
-	public void setFecha(String fecha) {
+	public void setDate(String date) {
 
 		try {
-			this.fecha = sdf.parse(fecha);
+			this.date = sdf.parse(date);
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Empresa [Nombre=" + name + ", fechaCreacion=" + date + "]";
 	}
 }
